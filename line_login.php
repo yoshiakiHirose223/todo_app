@@ -1,6 +1,6 @@
 <?php
 define('CLIENT_ID', '1656411743');
-define('REDIRECT_URL', 'http://localhost:8080');
+define('REDIRECT_URL', 'http://localhost:8080/index.php');
 define('STATE', getState());
 define('SCOPE', 'profile%20openid%20email');
 
