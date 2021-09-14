@@ -12,6 +12,8 @@ define('LOGIN_URL', 'https://access.line.me/oauth2/v2.1/authorize?response_type=
 . '&redirect_uri=' . REDIRECT_URL
 . '&state=' . STATE
 . '&scope=' . SCOPE
+. '&code_challenge=' . CODE_CHALLENGE
+. '&code_challenge_method=S256'
 );
 
 function generateState()
