@@ -1,17 +1,14 @@
 <?php
 session_start();
+require_once('line_config.php');
+
 $_SESSION['code_verifier'] = generateCodeVerifier();
 $_SESSION['state'] = generateState();
-define('CLIENT_ID', '1656411743');
-define('CLIENT_SECRET', '72480486de8939e6f13afec18338a2df');
-define('REDIRECT_URL', 'http://localhost:8080/line_callback.php');
-define('STATE', $_SESSION['state']);
-define('SCOPE', 'profile%20openid%20email');
 define('LOGIN_URL', 'https://access.line.me/oauth2/v2.1/authorize?response_type=code' .
 '&client_id='. CLIENT_ID
 . '&redirect_uri=' . REDIRECT_URL
-. '&state=' . STATE
-. '&scope=' . SCOPE
+. '&state=' . $_SESSION['state']
+. '&scope=profile%20openid%20email'
 . '&code_challenge=' . convertToCodeChallenge($_SESSION['code_verifier'])
 . '&code_challenge_method=S256'
 );
