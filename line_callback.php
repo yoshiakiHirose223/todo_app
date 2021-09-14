@@ -39,4 +39,3 @@ $profileResponse = curl_exec($profileCh);
 curl_close($profileCh);
 
 $profileJson = json_decode($profileResponse);
-var_dump($profileJson);
