@@ -1,33 +1,13 @@
 <?php
 session_start();
-//require_once('line_login.php');
+require_once('line_connection.php');
 
-var_dump($_GET['state']);
-var_dump($_SESSION['state']);
 if ($_GET['state'] === $_SESSION['state']) {
-    var_dump('true');
+    $tokenJson = requestTokenJson();
+    var_dump($tokenJson);
 }
-exit;
 
-$getTokenUrl = 'https://api.line.me/oauth2/v2.1/token';
-$tokenParam = [
-    'grant_type'    => 'authorization_code',
-    'code'          => $_GET['code'],
-    'redirect_uri'  => REDIRECT_URL,
-    'client_id'     => CLIENT_ID,
-    'client_secret' => CLIENT_SECRET,
-];
 
-$tokenCh = curl_init();
-curl_setopt($tokenCh, CURLOPT_URL, $getTokenUrl);
-curl_setopt($tokenCh, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-curl_setopt($tokenCh, CURLOPT_POST, true);
-curl_setopt($tokenCh, CURLOPT_POSTFIELDS, http_build_query($tokenParam));
-curl_setopt($tokenCh, CURLOPT_RETURNTRANSFER, true);
-$tokenResponse = curl_exec($tokenCh);
-curl_close($tokenCh);
-
-$tokenJson = json_decode($tokenResponse);
 $accessToken = $tokenJson->access_token;
 $idToken = $tokenJson->id_token;
 $refreshToken = $tokenJson->refresh_token;
