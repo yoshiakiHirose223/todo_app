@@ -1,5 +1,13 @@
 <?php
-require_once('line_login.php');
+session_start();
+//require_once('line_login.php');
+
+var_dump($_GET['state']);
+var_dump($_SESSION['state']);
+if ($_GET['state'] === $_SESSION['state']) {
+    var_dump('true');
+}
+exit;
 
 $getTokenUrl = 'https://api.line.me/oauth2/v2.1/token';
 $tokenParam = [

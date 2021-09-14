@@ -1,18 +1,18 @@
 <?php
+session_start();
+$_SESSION['code_verifier'] = generateCodeVerifier();
+$_SESSION['state'] = generateState();
 define('CLIENT_ID', '1656411743');
 define('CLIENT_SECRET', '72480486de8939e6f13afec18338a2df');
 define('REDIRECT_URL', 'http://localhost:8080/line_callback.php');
-define('STATE', generateState());
+define('STATE', $_SESSION['state']);
 define('SCOPE', 'profile%20openid%20email');
-define('CODE_VERIFIER', generateCodeVerifier());
-define('CODE_CHALLENGE', convertToCodeChallenge(CODE_VERIFIER));
-
 define('LOGIN_URL', 'https://access.line.me/oauth2/v2.1/authorize?response_type=code' .
 '&client_id='. CLIENT_ID
 . '&redirect_uri=' . REDIRECT_URL
 . '&state=' . STATE
 . '&scope=' . SCOPE
-. '&code_challenge=' . CODE_CHALLENGE
+. '&code_challenge=' . convertToCodeChallenge($_SESSION['code_verifier'])
 . '&code_challenge_method=S256'
 );
 
@@ -23,17 +23,18 @@ function generateState()
 
 function generateCodeVerifier()
 {
-    return generateRandomLength(generateRandomLength());
+    return generateRandomStr(generateRandomLength());
 }
 
 function convertToCodeChallenge($codeVerifier)
 {
-    return convertToEncrypted($codeVerifier);
+    $encryptedCodeChallenge = convertToEncrypted($codeVerifier);
+    return filterForParam($encryptedCodeChallenge);
 }
 
 function generateRandomLength()
 {
-    return range(43, 128);
+    return rand(43, 128);
 }
 
 function generateRandomStr($length)
