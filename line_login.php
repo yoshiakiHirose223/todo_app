@@ -25,8 +25,13 @@ function generateCodeVerifier()
 
 function convertToCodeChallenge($codeVerifier)
 {
-    $encryptedCodeChallenge = convertToEncrypted($codeVerifier);
-    return filterForParam($encryptedCodeChallenge);
+    return base64url_encode(
+        hash(
+            'sha256',
+            $codeVerifier,
+            true
+        )
+    );
 }
 
 function generateRandomLength()
@@ -36,7 +41,7 @@ function generateRandomLength()
 
 function generateRandomStr($length)
 {
-    $str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'));
+    $str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'), array('-', '.', '_', '~'));
     $r_str = null;
     for ($i = 0; $i < $length; $i++) {
         $r_str .= $str[rand(0, count($str) - 1)];
@@ -44,20 +49,11 @@ function generateRandomStr($length)
     return $r_str;
 }
 
-function convertToEncrypted($codeVerifier)
-{
-    $hashedStr = hash(
-        'sha256',
-        $codeVerifier
-    );
-    return base64_encode($hashedStr);
-}
-
-function filterForParam($encrypted)
+function base64url_encode($encrypted)
 {
     return str_replace(
         ['=','+', '/'],
         ['', '-', '_'],
-        $encrypted
+        base64_encode($encrypted)
     );
 }
