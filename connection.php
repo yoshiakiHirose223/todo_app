@@ -58,3 +58,12 @@ function deleteTodoData($id)
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 }
+
+function createUser($aud)
+{
+    $dbh = connectPdo();
+    $sql = 'INSERT INTO users (aud) VALUES (:aud)';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':aud', $aud, PDO::PARAM_STR);
+    $stmt->execute();
+}

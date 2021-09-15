@@ -1,10 +1,13 @@
 <?php
 session_start();
 require_once('line_connection.php');
+require_once('connection.php');
 
 if ($_GET['state'] === $_SESSION['state']) {
     $tokenJson = requestTokenJson();
-    var_dump($tokenJson);
+    $checkedIdTokenJson = checkIdToken($tokenJson->id_token);
+    createUser($checkedIdTokenJson->aud);
+    echo('新規登録完了');
 }
 
 
