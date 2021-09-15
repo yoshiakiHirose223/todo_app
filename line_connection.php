@@ -21,7 +21,6 @@ function requestTokenJson()
     curl_setopt($tokenCh, CURLOPT_POSTFIELDS, http_build_query($tokenParam));
     curl_setopt($tokenCh, CURLOPT_RETURNTRANSFER, true);
     $tokenResponse = curl_exec($tokenCh);
-    var_dump($_SESSION['code_verifier']);
     curl_close($tokenCh);
 
     return json_decode($tokenResponse);
