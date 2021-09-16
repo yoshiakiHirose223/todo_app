@@ -1,5 +1,6 @@
 <?php
 require_once('connection.php');
+require_once('session.php');
 require_once('line_connection.php');
 
 function getAccessTokenWithJson()
@@ -20,4 +21,10 @@ function registerUserIfNeeded($aud)
     if ($canRegister) {
         registerUser($aud);
     }
+}
+
+function logout()
+{
+    destroyAccessToken();
+    unsetAllSession();
 }

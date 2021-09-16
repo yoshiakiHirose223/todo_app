@@ -48,5 +48,6 @@ if (empty($_SESSION['user_id'])) {
     </table>
   </div>
   <?php unsetError(); ?>
+  <a href="logout.php">ログアウトする</a>
 </body>
 </html>

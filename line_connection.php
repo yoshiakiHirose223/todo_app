@@ -60,5 +60,4 @@ function destroyAccessToken()
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($param));
     $logoutResponse = curl_exec($ch);
-    var_dump($logoutResponse);
 }
