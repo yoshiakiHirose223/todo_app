@@ -85,3 +85,13 @@ function getUserIdByAud($aud)
     $stmt->execute();
     return $stmt->fetch();
 }
+
+function canCreateUser($aud)
+{
+    $userId = getUserIdByAud($aud);
+    if ($userId) {
+        return false;
+    } else {
+        return true;
+    }
+}

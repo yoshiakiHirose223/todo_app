@@ -2,6 +2,9 @@
 require_once('functions.php');
 header('Set-Cookie: flag=cookie123456789');
 setToken();
+if (empty($_SESSION['user_id'])) {
+  header('Location: ./login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
