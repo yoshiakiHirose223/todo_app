@@ -40,7 +40,11 @@ function storeUserIdInSession($userId)
 
 function getUserIdFromSession()
 {
-    return $_SESSION['user_id'];
+    if (isset($_SESSION['user_id'])) {
+        return $_SESSION['user_id'];
+    } else {
+        return false;
+    }
 }
 
 function storeAccessTokenInSession($accessToken)
@@ -51,4 +55,19 @@ function storeAccessTokenInSession($accessToken)
 function getAccessTokenFromSession()
 {
     return $_SESSION['access_token'];
+}
+
+function storeLoginErrorInSession($error)
+{
+    $_SESSION['login_error'] = $error;
+}
+
+function getLoginErrorFromSession()
+{
+    return $_SESSION['login_error'];
+}
+
+function unsetLoginErrorSession()
+{
+    unset($_SESSION['login_error']);
 }
