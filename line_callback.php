@@ -1,5 +1,6 @@
 <?php
 require_once('line_connection.php');
+require_once('line_functions.php');
 require_once('connection.php');
 require_once('session.php');
 
