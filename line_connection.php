@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once('line_config.php');
+require_once('session.php');
 
 function requestTokenJson()
 {
@@ -11,7 +11,7 @@ function requestTokenJson()
         'redirect_uri'  => REDIRECT_URL,
         'client_id'     => CLIENT_ID,
         'client_secret' => CLIENT_SECRET,
-        'code_verifier' => $_SESSION['code_verifier'],
+        'code_verifier' => getCodeVerifierFromSession(),
     ];
 
     $ch = curl_init();
@@ -51,7 +51,7 @@ function destroyAccessToken()
     $param = [
         'client_id' => CLIENT_ID,
         'client_secret' => CLIENT_SECRET,
-        'access_token' => $_SESSION['access_token'],
+        'access_token' => getAccessTokenFromSession(),
     ];
 
     $ch = curl_init();
