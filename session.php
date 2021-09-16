@@ -1,9 +1,16 @@
 <?php
 session_start();
+require_once('connection.php');
 
 function unsetAllSession()
 {
     $_SESSION = array();
+}
+
+function storeUserInfoInSession($aud, $accessToken)
+{
+    storeUserIdInSession(getUserIdByAud($aud));
+    storeAccessTokenInSession($accessToken);
 }
 
 function storeCodeVerifierInSession($codeVerifier)

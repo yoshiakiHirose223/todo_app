@@ -4,11 +4,12 @@ require_once('connection.php');
 require_once('session.php');
 
 if ($_GET['state'] === getStateFromSession()) {
-    $tokenJson = requestTokenJson();
-    $checkedIdTokenJson = checkIdToken($tokenJson->id_token);
-    if (canCreateUser($checkedIdTokenJson->aud)) {
-        createUser($checkedIdTokenJson->aud);
-    }
-    storeUserIdInSession(getUserIdByAud($checkedIdTokenJson->aud));
+    $accessTokenJson = getAccessTokenWithJson();
+    $checkedIdTokenJson = getCheckedIdTokenWithJson($accessTokenJson->id_token);
+    registerUserIfNeeded($checkedIdTokenJson->aud);
+    storeUserInfoInSession(
+        $checkedIdTokenJson->aud,
+        $accessTokenJson->access_token
+    );
     header('Location: ./index.php');
 }

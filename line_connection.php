@@ -2,7 +2,7 @@
 require_once('line_config.php');
 require_once('session.php');
 
-function requestTokenJson()
+function requestAccessToken()
 {
     $requestTokenUrl = 'https://api.line.me/oauth2/v2.1/token';
     $param = [
@@ -23,10 +23,10 @@ function requestTokenJson()
     $tokenResponse = curl_exec($ch);
     curl_close($ch);
 
-    return json_decode($tokenResponse);
+    return $tokenResponse;
 }
 
-function checkIdToken($idToken)
+function requestCheckIdToken($idToken)
 {
     $checkIdTokenUrl = 'https://api.line.me/oauth2/v2.1/verify';
     $param = [
@@ -42,7 +42,7 @@ function checkIdToken($idToken)
     $tokenResponse = curl_exec($ch);
     curl_close($ch);
 
-    return json_decode($tokenResponse);
+    return $tokenResponse;
 }
 
 function destroyAccessToken()

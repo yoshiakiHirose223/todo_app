@@ -67,7 +67,7 @@ function deleteTodoData($id)
     $stmt->execute();
 }
 
-function createUser($aud)
+function registerUser($aud)
 {
     $dbh = connectPdo();
     $sql = 'INSERT INTO users (aud) VALUES (:aud)';
@@ -86,7 +86,7 @@ function getUserIdByAud($aud)
     return $stmt->fetch();
 }
 
-function canCreateUser($aud)
+function canRegisterUser($aud)
 {
     $userId = getUserIdByAud($aud);
     if ($userId) {
