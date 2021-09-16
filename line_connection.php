@@ -44,3 +44,21 @@ function checkIdToken($idToken)
 
     return json_decode($tokenResponse);
 }
+
+function destroyAccessToken()
+{
+    $logoutUrl = 'https://api.line.me/oauth2/v2.1/revoke';
+    $param = [
+        'client_id' => CLIENT_ID,
+        'client_secret' => CLIENT_SECRET,
+        'access_token' => $_SESSION['access_token'],
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $logoutUrl);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($param));
+    $logoutResponse = curl_exec($ch);
+    var_dump($logoutResponse);
+}
