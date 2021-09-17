@@ -71,3 +71,12 @@ function unsetLoginErrorSession()
 {
     unset($_SESSION['login_error']);
 }
+
+function sessionHasLoginError()
+{
+    if (isset($_SESSION['login_error'])) {
+        return true;
+    } else {
+        return false;
+    }
+}
