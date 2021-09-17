@@ -1,9 +1,10 @@
 <?php
-require_once('functions.php');
+require_once(dirname(__FILE__) . '/../app/Service/functions.php');
+require_once(dirname(__FILE__) . '/../app/Service/session.php');
 header('Set-Cookie: flag=cookie123456789');
 setToken();
 if (empty(getUserIdFromSession())) {
-  header('Location: ./login.php');
+  header('Location:' . dirname(__FILE__) '/./login.php');
 }
 ?>
 <!DOCTYPE html>

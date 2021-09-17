@@ -1,6 +1,6 @@
 <?php
-require_once('config.php');
-require_once('session.php');
+require_once(dirname(__FILE__) . '/../../config/config.php');
+require_once(dirname(__FILE__) . '/../Service/session.php');
 
 function connectPdo()
 {

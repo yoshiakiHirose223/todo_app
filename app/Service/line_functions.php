@@ -1,7 +1,7 @@
 <?php
-require_once('connection.php');
-require_once('session.php');
-require_once('line_connection.php');
+require_once(dirname(__FILE__) . '/../Model/connection.php');
+require_once(dirname(__FILE__) . '/./session.php');
+require_once(dirname(__FILE__) . '/../Model/line_connection.php');
 
 function canGetAccessToken()
 {

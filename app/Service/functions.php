@@ -1,5 +1,5 @@
 <?php
-require_once('connection.php');
+require_once(dirname(__FILE__) . '/../Model/connection.php');
 
 function setToken()
 {

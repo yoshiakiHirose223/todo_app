@@ -1,5 +1,5 @@
 <?php
-require_once('functions.php');
+require_once(dirname(__FILE__) . '/../app/Service/functions.php');
 setToken();
 ?>
 <!DOCTYPE html>

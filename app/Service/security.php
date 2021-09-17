@@ -1,17 +1,4 @@
 <?php
-require_once('session.php');
-require_once('line_config.php');
-
-storeCodeVerifierInSession(generateCodeVerifier());
-storeStateInSession(generateState());
-define('LOGIN_URL', 'https://access.line.me/oauth2/v2.1/authorize?response_type=code' .
-'&client_id='. CLIENT_ID
-. '&redirect_uri=' . REDIRECT_URL
-. '&state=' . getStateFromSession()
-. '&scope=profile%20openid%20email'
-. '&code_challenge=' . convertToCodeChallenge(getCodeVerifierFromSession())
-. '&code_challenge_method=S256'
-);
 
 function generateState()
 {

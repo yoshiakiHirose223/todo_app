@@ -1,6 +1,22 @@
 <?php
-require_once('line_config.php');
-require_once('session.php');
+require_once(dirname(__FILE__) . '/../../config/line_config.php');
+require_once(dirname(__FILE__) . '/../Service/session.php');
+
+function getLineLoginAuthUrl()
+{
+    $lineLoginAuthUrl = 'https://access.line.me/oauth2/v2.1/authorize';
+    $param = [
+        'response_type'         => 'code',
+        'client_id'             => CLIENT_ID,
+        'redirect_uri'          => REDIRECT_URL,
+        'state'                 => getStateFromSession(),
+        'scope'                 => 'profile%20openid%20email'
+        'code_challenge'        => convertToCodeChallenge(getCodeVerifierFromSession()),
+        'code_challenge_method' => 'S256',
+    ];
+    var_dump($lineLoginAuthUrl . http_build_query($param));
+    return $lineLoginAuthUrl . http_build_query($param);
+}
 
 function requestAccessToken()
 {

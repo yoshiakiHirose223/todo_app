@@ -1,7 +1,6 @@
 <?php
-require_once('line_functions.php');
-
-logout();
+require_once(dirname(__FILE__) . '/../../app/Service/session.php');
+unsetLoginErrorSession();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -9,10 +8,9 @@ logout();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログアウト</title>
+    <title>ログイン</title>
 </head>
 <body>
-    <p>ログアウト完了しました。</p>
-    <a href="login.php">ログインする。</a>
+  <a href="../../app/line/line_login.php">ログイン</a>
 </body>
 </html>
